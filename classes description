@@ -1,0 +1,79 @@
+### AllManagers
+
+  attributes:
+    + managers: User[]
+
+  methodes:
+    + static CreateManagersArray(): void
+    + static PopulateManagersArrayWithTheirTeams(): void
+    + static ManagersChooseGuard1(): void
+    + static ManagersChooseGuard2(): void
+    + static ManagersChooseForward1(): void
+    + static ManagersChooseForward2(): void
+    + static ManagersChooseCenter(): void
+    
+ 
+ ### User
+ 
+  attributes:
+    + name: string
+    + yourTeam: Team
+    + static inputTeamNameValue: string
+    + static stringinputPlayerNameValue: string
+    + availability: bool
+    + static managers: User[]
+    
+  methodes:
+    + static CreateYourUser(): void
+    + static CreateName(User you): void
+    + InputTeamName(): void
+    + CheckInputTeamName(): int
+    + static ChooseGuard1(): int
+    + static ChooseGuard2(): int
+    + static ChooseForward1(): int
+    + static ChooseForward(): int
+    + static ChooseForward2(): int
+    + static ChooseCenter(): int
+    + static PrintYourRoster(): void
+    
+    
+### Team
+
+  attributes:
+    + name: string
+    + guard: Player
+    + guard2: Player
+    + forward1: Player
+    + forward2: Player
+    + center: Player
+    + managerName: string
+    + availability: bool
+    + static teams: Team[]
+  
+  methodes:
+    + static CreateAllTeams(): void
+    + static PrintAllTeams(): void
+    + getTeamName(): string
+    
+    
+### Player
+
+  attributes:
+    + name: string
+    + position: string
+    + points: double
+    + rebounds: double
+    + assists: double
+    + stills: double
+    + blocks: double
+    + basketball_iq: int
+    + bpm: double
+    + team: string
+    + salary: double
+    + availabilty: bool
+    + static players: Player[]   
+  
+  methodes:
+    + static CreateAllPlayers(): void
+    + static PrintAllPlayers(): void
+    + static electRandomPlayer(): Player
