@@ -1,0 +1,131 @@
+
+using System;
+
+namespace nba
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            
+            //AllTeams allTeams = new AllTeams();
+
+ 
+            Team.CreateAllTeams();
+                // tworzy tablicę drużyn <teams>
+                // populuje tablicę o typie: obiekt <Team> - dla każdej drużyny
+
+            
+            AllManagers.CreateManagersArray();
+                // tworzy tablicę managerów <managers> typ: obiekt <User>
+
+            User.CreateYourUser();
+                // tworzy usera i uruchamia inne funkcje wewnątrz User:
+                // wybranie drużyny przez usera
+                // zablokowanie dostępności wybranej drużyny dla innych userów-managerów 
+
+            AllManagers.PopulateManagersArrayWithTheirTeams();
+            // populuje tablicę managers typem: obiekt User
+            // przypisanie do nazwy usera = imię managera danej drużyny
+            // przypisuje do każdego obiektu User-manager nazwę drużyny
+            // WORK: po co tworzyć AllManagers i for-em przypisywać Userów
+            // może lepiej połączyć to wszystko w AllUsers i na stałe zapisać we właściwościach nazwy managerów?
+
+            //CHECK:
+            //pętla sprawdzająca managerów wszystkich drużyn
+            //foreach (var team in AllTeams.teams)
+            //{
+            //    Console.WriteLine(team.name + "  " + team.managerName);
+            //}
+
+            Console.WriteLine("\n A teraz wybierz do drużyny najlepszych zawodników na każdą pozycję.");
+            Console.Read();
+
+            AllPlayers.CreateAllPlayers();  
+                // tworzy tablicę o typie: obiekt Player
+
+            AllPlayers.PrintAllPlayers();
+                // wyświetla graczy do wyboru dla użytkownika
+
+            User.ChooseGuard1();
+
+            AllManagers.ManagersChooseGuard1();
+
+            //CHECK POINT:
+            Console.WriteLine("Check guard1: ");
+            foreach (var manager in AllManagers.managers)
+            {
+                Console.WriteLine(manager.name + " " + manager.yourTeam.name
+                                  + "  " + manager.yourTeam.guard1.name);
+            }
+
+
+            // IN WORK
+            AllPlayers.PrintAllPlayers();
+
+            User.ChooseGuard2();
+
+            AllManagers.ManagersChooseGuard2();
+
+            AllPlayers.PrintAllPlayers();
+
+            User.ChooseForward1();
+
+            AllManagers.ManagersChooseForward1();
+
+            AllPlayers.PrintAllPlayers();
+
+            User.ChooseForward2();
+
+            AllManagers.ManagersChooseForward2();
+
+            AllPlayers.PrintAllPlayers();
+
+            User.ChooseCenter();
+
+            AllManagers.ManagersChooseCenter();
+
+            //CHECK POINT:
+            //Console.WriteLine("Rosters: ");
+            //foreach (var manager in AllManagers.managers)
+            //{
+            //    Console.WriteLine(manager.name + " " + manager.yourTeam.name
+            //                        + "  " + manager.yourTeam.guard1.name + "  " + manager.yourTeam.guard2.name
+            //                        + "  " + manager.yourTeam.forward1.name + "  " + manager.yourTeam.forward2.name
+            //                        + "  " + manager.yourTeam.center.name + "\n");
+            //}
+
+            //User.PrintYourRoster();
+            //////////////////////////////////////////////////////////////////////////////////////
+
+            Console.WriteLine("\n--------------------------------------------------------------------------------------------\n");
+            Console.WriteLine("\nTwoja drużyna została skompletowana. Uruchom algorytm obliczający potencjał drużyn" +
+                " i zobacz swój wynik na tle innych menedżerów.");
+            Console.Read();
+
+            // Console.WriteLine(" >>>>>>>>>>>>>>>>>>>>>>>>  Zaczynamy algo >>>>>>>>>>>>>>>>>>>>>> \n");
+
+            PositionsMatchUser.GetPositions();
+
+            PositionsMatchUser.CheckIfIdealPositionMatch();
+
+            Console.WriteLine("\n\n----------------------------------------------------------------");
+            Console.WriteLine("     Specyfikacja punktacji uzyskanej przez twoją drużynę:");
+            Console.WriteLine("----------------------------------------------------------------");
+            Console.WriteLine("- adekwatność dopasowania zawodników do pozycji = {0}", AllManagers.managers[0].yourTeam.scorePositions);
+
+            ScoreUser.GetPlayers();
+            ScoreUser.CountScoreUser();
+
+            Console.Read();
+            Console.WriteLine("\n A oto punktacja innych drużyn: \n");
+            Console.Read();
+            Console.Read();
+
+            PositionsMatchOtherManagers.CountPositionsScoreOtherManagers();
+            ScoreOtherManagers.CountScoreOtherManagers();
+
+            Console.Read();
+        }
+    }
+}
