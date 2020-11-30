@@ -1,0 +1,130 @@
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace nba
+{
+    class Team
+    {
+        public string name;
+        public Player guard1;
+        public Player guard2;
+        public Player forward1;
+        public Player forward2;
+        public Player center;
+
+        public string managerName;
+
+        public bool availability = true;
+
+        public double scorePositions;
+        public double score3Points;
+        public double scoreOffense;
+        public double scoreDefense;
+        public double scoreIQ;
+        public double scoreTotal;
+
+        public static Team[] teams;
+
+
+        public Team(string nameArg, Player guard1Arg, Player guard2Arg, Player forward1Arg, Player forward2Arg, Player centerArg, string managerNameArg)
+        //kontruktor pełny
+        {
+            this.name = nameArg;
+            this.guard1 = guard1Arg;
+            this.guard2 = guard2Arg;
+            this.forward1 = forward1Arg;
+            this.forward2 = forward2Arg;
+            this.center = centerArg;
+            this.managerName = managerNameArg;
+        }
+        public Team(string nameArg, string managerNameArg) //konstruktor name
+        {
+            this.name = nameArg;
+            this.managerName = managerNameArg;
+        }
+
+        public string getTeamName()
+        {
+            return name;
+        }
+
+        public static void CreateAllTeams()
+        {
+            teams = new Team[10];
+
+            Team Atlanta_Hawks = new Team("Atlanta Hawks", "Michał Jastrząb");
+            teams[0] = Atlanta_Hawks;
+            Team Boston_Celtics = new Team("Boston Celtics", "Dany Ainge");
+            teams[1] = Boston_Celtics;
+            Team Brooklyn_Nets = new Team("Brooklyn Nets", "Jay-z");
+            teams[2] = Brooklyn_Nets;
+            Team Charlotte_Bobcats = new Team("Charlotte Bobcats", "Michael Jordan");
+            teams[3] = Charlotte_Bobcats;
+            Team Chicago_Bulls = new Team("Chicago Bulls", "Antoni Szczupak");
+            teams[4] = Chicago_Bulls;
+            Team Cleveland_Cavaliers = new Team("Cleveland Cavaliers", "Vladimir Putin");
+            teams[5] = Cleveland_Cavaliers;
+            Team Dallas_Mavericks = new Team("Dallas Mavericks", "Marc Cuban");
+            teams[6] = Dallas_Mavericks;
+            Team Denver_Nuggets = new Team("Denver Nuggets", "Paul Allen");
+            teams[7] = Denver_Nuggets;
+            Team Detroit_Pistons = new Team("Detroit Pistons", "Elon Musk");
+            teams[8] = Detroit_Pistons;
+            Team Golden_State_Warriors = new Team("Golden State Warriors", "Bob Myers");
+            teams[9] = Golden_State_Warriors;
+            //Team Houston_Rockets = new Team("Houston Rockets", "Daryl Morey");
+            //teams[10] = Houston_Rockets;
+            //Team Indiana_Pacers = new Team("Indiana Pacers");
+            //teams[11] = Indiana_Pacers;
+            //Team LA_Clippers = new Team("LA Clippers");
+            //teams[12] = LA_Clippers;
+            //Team LA_Lakers = new Team("LA Lakers");
+            //teams[13] = LA_Lakers;
+            //Team Memphis_Grizzlies = new Team("Memphis Grizzlies");
+            //teams[14] = Memphis_Grizzlies;
+            //Team Miami_Heat = new Team("Miami Heat");
+            //teams[15] = Miami_Heat;
+            //Team Milwaukee_Bucks = new Team("Milwaukee Bucks");
+            //teams[16] = Milwaukee_Bucks;
+            //Team Minnesota_Timberwolves = new Team("Minnesota Timberwolves");
+            //teams[17] = Minnesota_Timberwolves;
+            //Team New_Orleans_Hornets = new Team("New Orleans Hornets");
+            //teams[18] = New_Orleans_Hornets;
+            //Team New_York_Knicks = new Team("New York Knicks");
+            //teams[19] = New_York_Knicks;
+            //Team Oklahoma_City_Thunder = new Team("Oklahoma City Thunder");
+            //teams[20] = Oklahoma_City_Thunder;
+            //Team Orlando_Magic = new Team("Orlando Magic");
+            //teams[21] = Orlando_Magic;
+            //Team Philadelphia_Sixers = new Team("Philadelphia Sixers");
+            //teams[22] = Philadelphia_Sixers;
+            //Team Phoenix_Suns = new Team("Phoenix Suns");
+            //teams[23] = Phoenix_Suns;
+            //Team Portland_Trail_Blazers = new Team("Portland Trail Blazers");
+            //teams[24] = Portland_Trail_Blazers;
+            //Team Sacramento_Kings = new Team("Sacramento Kings");
+            //teams[25] = Sacramento_Kings;
+            //Team San_Antonio_Spurs = new Team("San Antonio Spurs");
+            //teams[26] = San_Antonio_Spurs;
+            //Team Toronto_Raptors = new Team("Team Toronto Raptors");
+            //teams[27] = Toronto_Raptors;
+            //Team Utah_Jazz = new Team("Utah Jazz");
+            //teams[28] = Utah_Jazz;
+            //Team Washington_Wizards = new Team("Washington Wizards");
+            //teams[29] = Washington_Wizards;
+        }
+
+        public static void PrintAllTeams()
+        {
+            foreach (var item in teams)
+            {
+                Console.WriteLine(item.getTeamName());
+            }
+        }
+
+
+
+    }
+}
