@@ -1,0 +1,62 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace nba
+{
+    class ScoreUser
+    {
+        public static Player[] playersScore = new Player[5];
+    
+        public static void GetPlayers()
+        {
+            playersScore[0] = AllManagers.managers[0].yourTeam.guard1;
+            playersScore[1] = AllManagers.managers[0].yourTeam.guard2;
+            playersScore[2] = AllManagers.managers[0].yourTeam.forward1;
+            playersScore[3] = AllManagers.managers[0].yourTeam.forward2;
+            playersScore[4] = AllManagers.managers[0].yourTeam.center;
+        }
+
+        public static void CountScoreUser()
+        {
+            
+            double counterPoints = 0;
+            double counterPointsPerc = 0;
+            double counter3Points = 0;
+            double counterAssists = 0;
+            double counterRebounds = 0;
+            double counterStills = 0;
+            double counterBlocks = 0;
+
+            foreach (var player in playersScore)
+            {   
+                //offense:
+                counterPoints = counterPoints + (player.points * 0.61);
+                counterPointsPerc = counterPointsPerc + (player.percentage2 * 0.12);
+                counter3Points = counter3Points + (player.goalsMade3 * 2.74);
+                counterAssists = counterAssists + (player.assists * 2.617);
+                //defense:
+                counterRebounds = counterRebounds + (player.rebounds * 1.538);
+                counterStills = counterStills + (player.stills * 5.455);
+                counterBlocks = counterBlocks + (player.blocks * 4.444);
+                // powyższe np. w counter3Points:
+                // faktor 4 => Stephen curry max = 5,1 x 2.74 = 14,025 => 14,025 * 5 zawodników = 70 pkt (wyznaczony max)
+            }
+            AllManagers.managers[0].yourTeam.scoreTotal = (counter3Points + counterPointsPerc + counter3Points + counterAssists
+                                                            + counterRebounds + counterStills + counterBlocks
+                                                            + AllManagers.managers[0].yourTeam.scorePositions);
+            Console.WriteLine("- potencjał ofensywny = " + counterPoints);
+            Console.WriteLine("- skuteczność ofensywna za 2 pkt = " + counterPointsPerc);
+            Console.WriteLine("- skuteczność ofensywna za 3 pkt  = " + counter3Points);
+            Console.WriteLine("- asysty = " + counterAssists);
+            Console.WriteLine("- zbiórki = " + counterRebounds);
+            Console.WriteLine("- przechwyty = " + counterStills);
+            Console.WriteLine("- bloki = " + counterBlocks);
+            Console.WriteLine("\n      SUMA UZYSKANYCH PUNKTÓW PRZEZ TWOJĄ DRUŻYNĘ TO {0} \n", AllManagers.managers[0].yourTeam.scoreTotal);
+        }
+        public static void CountPointsScore()
+        {
+            //double counterPoints = 0;
+        }
+    }
+}
