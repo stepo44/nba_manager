@@ -1,0 +1,615 @@
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace nba
+{
+    class AllPlayers
+    {
+        public static Player[] players;  //dodać właściwość get;set
+
+        public static void PrintAllPlayers()
+        {
+            Console.WriteLine("\n ----- LISTA DOSTĘPNYCH ZAWODNIKÓW ----- \n");
+            foreach (var player in players)
+            {
+                if (player.availabilty == true)
+                {
+                    Console.WriteLine("Zawodnik: {0} \n" +
+                                        " - pozycja na boisku: {1} \n" +
+                                        " - średnia punktów: {2} \n" +
+                                        " - średnia zbiórek: {3} \n" +
+                                        " - średnia asyst: {4} \n" +
+                                        " - średnia przechwytów: {5} \n" +
+                                        " - średnia bloków: {6} \n" +
+                                        " - procent rzutów za 2 pkt: {7} \n" +
+                                        " - ilość trafianych rzutów za 3 pkt: {8} \n" +
+                                        " - inteligencja boiskowa: {9} \n",
+                    player.name, player.position, player.points, player.rebounds, player.assists, player.stills
+                    , player.blocks, player.percentage2, player.goalsMade3, player.basketball_iq);
+                }
+            }
+        }
+
+        //public string name;
+        //public string position;
+        //public double points;
+        //public double rebounds;
+        //public double assists;
+        //public double stills;
+        //public double blocks;
+        //public double percentage2;
+        //public double goalsMade3;
+        //public int basketball_iq;
+
+        public static Player SelectRandomPlayer()
+        {
+            // fun wywoływana i zwracająca obj Player do AllManagersChooseGuard1/Forward1...()
+
+            List<Player> playersToRandomSelect = new List<Player>();
+
+            for (int player = 0; player < AllPlayers.players.Length; player++) // szuka dostępnych zawodników i dodaje do listy playersToRandomSelect
+            {
+                if (players[player].availabilty == true)
+                {
+                    playersToRandomSelect.Add(players[player]);
+                }
+            }
+
+            // wybiera randomowego zawodnika i go zwraca do na zewnątrz do fun ManagersChooseGuard1()
+            Random rand = new Random();
+            int randIndex = rand.Next(playersToRandomSelect.Count);
+            Player randPlayer = playersToRandomSelect[randIndex];
+            return randPlayer;
+        }
+
+        public static Player SelectRandomGuardPlayer()
+        {
+            // fun wywoływana i zwracająca obj Player do AllManagersChooseGuard1/Forward1...()
+
+            List<Player> PlayersGuardToRandomSelect = new List<Player>();
+
+            for (int player = 0; player < AllPlayers.players.Length; player++) // szuka dostępnych zawodników i dodaje do listy playersToRandomSelect
+            {
+                if (players[player].availabilty == true && (players[player].position == "Point Guard" || players[player].position == "Shooting Guard"))
+                {
+                    PlayersGuardToRandomSelect.Add(players[player]);
+                }
+            }
+
+            // wybiera randomowego zawodnika i go zwraca do na zewnątrz do fun ManagersChooseGuard1()
+            Random rand = new Random();
+            int randIndex = rand.Next(PlayersGuardToRandomSelect.Count);
+            Player randPlayer = PlayersGuardToRandomSelect[randIndex];
+            return randPlayer;
+        }
+
+
+        public static Player SelectRandomForwardCenterPlayer()
+        {
+            // fun wywoływana i zwracająca obj Player do AllManagersChooseGuard1/Forward1...()
+
+            List<Player> PlayersForwardCenterToRandomSelect = new List<Player>();
+
+            for (int player = 0; player < AllPlayers.players.Length; player++) // szuka dostępnych zawodników i dodaje do listy playersToRandomSelect
+            {
+                if (players[player].availabilty == true && (players[player].position == "Small Forward" || players[player].position == "Power Forward" || players[player].position == "Center"))
+                {
+                    PlayersForwardCenterToRandomSelect.Add(players[player]);
+                }
+            }
+
+            // wybiera randomowego zawodnika i go zwraca do na zewnątrz do fun ManagersChooseGuard1()
+            Random rand = new Random();
+            int randIndex = rand.Next(PlayersForwardCenterToRandomSelect.Count);
+            Player randPlayer = PlayersForwardCenterToRandomSelect[randIndex];
+            return randPlayer;
+        }
+
+
+
+        public static void CreateAllPlayers()
+        {
+            players = new Player[150];
+
+            // name // position
+            // points  // rebounds  // assists // stills // blocks
+            // percentage field // made three 
+            // IQ
+            // team name // salary
+
+            // POINT GUARDS
+
+            Player James_Harden = new Player("James Harden", "Point Guard", 36.1, 6.6, 7.5, 2.0, 0.7, 44.2, 4.8, 100, "Houston Rockets", 1);
+            players[0] = James_Harden;
+
+            Player Stephen_Curry = new Player("Stephen Curry", "Point Guard", 27.3, 5.3, 5.2, 1.3, 0.4, 47.2, 5.1, 100, "Golden State Warriors", 1);
+            players[1] = Stephen_Curry;
+
+            Player Kyrie_Irving = new Player("Kyrie Irving", "Point Guard", 23.8, 5.0, 6.9, 1.5, 0.5, 48.7, 2.6, 100, "Brooklyn Nets", 1);
+            players[2] = Kyrie_Irving;
+
+            Player Damian_Lillard = new Player("Damian Lillard", "Point Guard", 25.8, 4.6, 6.9, 1.1, 0.4, 44.4, 3.0, 100, "Portland Trail Blazers", 1);
+            players[3] = Damian_Lillard;
+
+            Player Kemba_Walker = new Player("Kemba Walker", "Point Guard", 25.6, 4.4, 5.9, 1.2, 0.4, 43.4, 3.2, 100, "Boston Celtics", 1);
+            players[4] = Kemba_Walker;
+
+            Player Mike_Conley = new Player("Mike Conley", "Point Guard", 21.1, 3.4, 6.4, 1.3, 0.3, 43.8, 2.2, 100, "Utah Jazz", 1);
+            players[5] = Mike_Conley;
+
+            Player Russell_Westbrook = new Player("Russell Westbrook", "Point Guard", 22.9, 11.1, 10.7, 1.9, 0.5, 42.8, 1.6, 100, "Oklahoma City Thunder", 1);
+            players[6] = Russell_Westbrook;
+
+            Player Ben_Simmons = new Player("Ben Simmons", "Point Guard", 16.9, 8.8, 7.7, 1.4, 0.8, 56.3, 0.0, 100, "Philadelphia Sixers", 1);
+            players[7] = Ben_Simmons;
+
+            Player Chris_Paul = new Player("Chris Paul", "Point Guard", 15.6, 4.6, 8.2, 2.0, 0.3, 41.9, 2.2, 100, "Houston Rockets", 1);
+            players[8] = Chris_Paul;
+
+            Player DAngelo_Russell = new Player("D'Angelo Russell", "Point Guard", 21.1, 3.9, 7.0, 1.2, 0.2, 43.4, 2.9, 100, "Golden State Warriors", 1);
+            players[9] = DAngelo_Russell;
+
+            Player Jrue_Holiday = new Player("Jrue Holiday", "Point Guard", 21.2, 5.0, 7.7, 1.6, 0.8, 47.2, 1.8, 100, "New Orleans Pelicans", 1);
+            players[10] = Jrue_Holiday;
+
+            Player Eric_Bledsoe = new Player("Eric Bledsoe", "Point Guard", 15.9, 4.6, 5.5, 1.5, 0.4, 48.4, 1.6, 100, "Milwaukee Bucks", 1);
+            players[11] = Eric_Bledsoe;
+
+            Player Zach_LaVine = new Player("Zach LaVine", "Point Guard", 23.7, 4.7, 4.5, 1.0, 0.4, 46.7, 1.9, 100, "Chicago Bulls", 1);
+            players[12] = Zach_LaVine;
+
+            Player DeAaron_Fox = new Player("De'Aaron Fox", "Point Guard", 17.3, 3.8, 7.3, 1.6, 0.6, 45.8, 1.1, 100, "Sacramento Kings", 1);
+            players[13] = DeAaron_Fox;
+
+            Player Malcolm_Brodgon = new Player("Malcolm Brodgon", "Point Guard", 15.6, 4.5, 3.2, 0.7, 0.2, 50.5, 1.6, 100, "Indiana Pacers", 1);
+            players[14] = Malcolm_Brodgon;
+
+            Player Kyle_Lowry = new Player("Kyle Lowry", "Point Guard", 14.2, 4.8, 8.7, 1.4, 0.5, 41.1, 2.4, 100, "Toronto Raptors", 1);
+            players[15] = Kyle_Lowry;
+
+            Player Jamal_Murray = new Player("Jamal Murray", "Point Guard", 18.2, 4.2, 4.8, 0.9, 0.4, 43.7, 2.0, 100, "Denver Nuggets", 1);
+            players[16] = Jamal_Murray;
+
+            Player Collin_Sexton = new Player("Collin Sexton", "Point Guard", 16.7, 2.9, 3.0, 0.5, 0.1, 43.0, 1.5, 100, "Clevland Cavaliers", 1);
+            players[17] = Collin_Sexton;
+
+            Player Trae_Young = new Player("Trae Young", "Point Guard", 19.1, 3.7, 8.1, 0.9, 0.2, 41.8, 1.9, 100, "Atlanta Hawks", 1);
+            players[18] = Trae_Young;
+
+            Player Dennis_Schroder = new Player("Dennis Schroder", "Point Guard", 15.5, 3.6, 4.1, 0.8, 0.2, 41.4, 1.6, 100, "Oklahoma City Thunder", 1);
+            players[19] = Dennis_Schroder;
+
+            Player Spencer_Dinwiddie = new Player("Spencer Dinwiddie", "Point Guard", 16.8, 2.4, 4.6, 0.6, 0.3, 44.2, 1.8, 100, "Brooklyn Nets", 1);
+            players[20] = Spencer_Dinwiddie;
+
+            Player DJ_Augustin = new Player("D.J. Augustin", "Point Guard", 11.7, 2.5, 5.3, 0.6, 0.0, 47.0, 1.6, 100, "Orlando Magic", 1);
+            players[21] = DJ_Augustin;
+
+            Player Ricky_Rubio = new Player("Ricky Rubio", "Point Guard", 12.7, 3.6, 6.1, 1.3, 0.1, 40.4, 1.2, 100, "Phoenix Suns", 1);
+            players[22] = Ricky_Rubio;
+
+            Player Reggie_Jackson = new Player("Reggie Jackson", "Point Guard", 15.4, 2.6, 4.2, 0.7, 0.1, 42.1, 2.1, 100, "Detroit Pistons", 1);
+            players[23] = Reggie_Jackson;
+
+            Player Marcus_Smart = new Player("Marcus Smart", "Point Guard", 8.9, 2.9, 4.0, 1.8, 0.4, 42.2, 1.6, 100, "Boston Celtics", 1);
+            players[24] = Marcus_Smart;
+
+            Player Fred_VanVleet = new Player("Fred VanVleet", "Point Guard", 11.0, 2.6, 4.8, 0.9, 0.3, 41.0, 1.8, 100, "Toronto Raptors", 1);
+            players[25] = Fred_VanVleet;
+
+            Player Patrick_Beverley = new Player("Patrick Beverley", "Point Guard", 7.6, 5.0, 3.8, 0.9, 0.6, 40.7, 1.4, 100, "LA Clippers", 1);
+            players[26] = Patrick_Beverley;
+
+            Player Austin_Rivers = new Player("Austin Rivers", "Point Guard", 8.1, 2.1, 2.2, 0.6, 0.3, 40.6, 1.4, 100, "Washington Wizards", 1);
+            players[27] = Austin_Rivers;
+
+            Player Shai_Gilgeous_Alexander = new Player("Shai Gilgeous-Alexander", "Point Guard", 10.8, 2.8, 3.3, 1.2, 0.5, 47.6, 0.6, 100, "Oklahoma City Thunder", 1);
+            players[28] = Shai_Gilgeous_Alexander;
+
+            Player Derrick_White = new Player("Derrick White", "Point Guard", 9.9, 3.7, 3.9, 1.0, 0.7, 47.9, 0.7, 100, "San Antonio Spurs", 1);
+            players[29] = Derrick_White;
+
+            // SHOOTING GUARDS
+
+            Player Bradley_Beal = new Player("Bradley Beal", "Shooting Guard", 25.6, 5.0, 5.5, 1.5, 0.7, 47.5, 2.5, 100, "Washington Wizards", 1);
+            players[30] = Bradley_Beal;
+
+            Player DeMar_DeRozan = new Player("DeMar DeRozan", "Shooting Guard", 21.2, 6.0, 6.2, 1.1, 0.5, 48.1, 0.1, 100, "San Antonio Spurs", 1);
+            players[31] = DeMar_DeRozan;
+
+            Player Josh_Richardson = new Player("Josh Richardson", "Shooting Guard", 16.6, 3.6, 4.1, 1.1, 0.5, 41.2, 2.2, 100, "Philadelphia Sixers", 1);
+            players[32] = Josh_Richardson;
+
+            Player Klay_Thompson = new Player("Klay Thompson", "Shooting Guard", 21.5, 3.8, 2.4, 1.1, 0.6, 46.7, 3.1, 100, "Golden State Warriors", 1);
+            players[33] = Klay_Thompson;
+
+            Player CJ_McCollum = new Player("CJ McCollum", "Shooting Guard", 21.0, 4.0, 3.0, 0.8, 0.4, 45.9, 2.4, 100, "Portland Trail Blazers", 1);
+            players[34] = CJ_McCollum;
+
+            Player Donavan_Mitchell = new Player("Donavan Mitchell", "Shooting Guard", 23.8, 4.1, 4.2, 1.4, 0.4, 43.2, 2.4, 100, "Utah Jazz", 1);
+            players[35] = Donavan_Mitchell;
+
+            Player Jimmy_Butler = new Player("Jimmy Butler", "Shooting Guard", 18.7, 5.3, 4.0, 1.9, 0.6, 46.2, 1.0, 100, "Miami Heat", 1);
+            players[36] = Jimmy_Butler;
+
+            Player Buddy_Hield = new Player("Buddy Hield", "Shooting Guard", 20.7, 5.0, 2.5, 0.7, 0.4, 45.8, 3.4, 100, "Sacramento Kings", 1);
+            players[37] = Buddy_Hield;
+
+            Player Eric_Gordon = new Player("Eric Gordon", "Shooting Guard", 16.2, 2.2, 1.9, 0.6, 0.4, 40.9, 3.2, 100, "Houston Rockets", 1);
+            players[38] = Eric_Gordon;
+
+            Player Tim_Hardaway_Jr = new Player("tim Hardaway Jr", "Shooting Guard", 18.1, 3.4, 2.4, 0.8, 0.1, 39.3, 2.5, 100, "Dallas Mavericks", 1);
+            players[39] = Tim_Hardaway_Jr;
+
+            Player Evan_Fournier = new Player("Evan Fournier", "Shooting Guard", 15.1, 3.2, 3.6, 0.9, 0.1, 43.8, 1.9, 100, "Orlando Magic", 1);
+            players[40] = Evan_Fournier;
+
+            Player JJ_Redick = new Player("JJ Redick", "Shooting Guard", 18.1, 2.4, 2.7, 0.4, 0.2, 44.0, 3.2, 100, "New Orleans Pelicans", 1);
+            players[41] = JJ_Redick;
+
+            Player Wesley_Matthews = new Player("Wesley Matthews", "Shooting Guard", 12.2, 2.5, 2.3, 0.8, 0.2, 40.0, 2.2, 100, "Indiana Pacers", 1);
+            players[42] = Wesley_Matthews;
+
+            Player Avery_Bradley = new Player("Avery Bradley", "Shooting Guard", 9.9, 2.8, 2.4, 0.7, 0.3, 40.8, 1.4, 100, "Los Angeles Lakers", 1);
+            players[43] = Avery_Bradley;
+
+            Player Reggie_Bullock = new Player("Reggie Bullock", "Shooting Guard", 11.3, 2.7, 2.0, 0.6, 0.2, 41.2, 2.3, 100, "Los Angeles Lakers", 1);
+            players[44] = Reggie_Bullock;
+
+            Player Jeremy_Lamb = new Player("Jeremy Lamb", "Shooting Guard", 15.3, 5.5, 2.2, 1.1, 0.4, 44.0, 1.5, 100, "Indiana Pacers", 1);
+            players[45] = Jeremy_Lamb;
+
+            Player Bryn_Forbes = new Player("Bryn Forbes", "Shooting Guard", 11.8, 2.9, 2.1, 0.5, 0.0, 45.6, 2.1, 100, "San Antonio Spurs", 1);
+            players[46] = Bryn_Forbes;
+
+            Player Bogdan_Bogdanovic = new Player("Bogdan Bogdanovic", "Shooting Guard", 14.1, 3.5, 3.8, 1.0, 0.2, 41.8, 1.9, 100, "Sacramento Kings", 1);
+            players[47] = Bogdan_Bogdanovic;
+
+            Player Danny_Green = new Player("Danny Green", "Shooting Guard", 10.3, 4.0, 1.6, 0.9, 0.7, 46.5, 2.5, 100, "Los Angeles Lakers", 1);
+            players[48] = Danny_Green;
+
+            Player Tomas_Satoransky = new Player("Tomas Satoransky", "Shooting Guard", 8.9, 3.5, 5.0, 1.0, 0.2, 48.5, 0.8, 100, "Chicago Bulls", 1);
+            players[49] = Tomas_Satoransky;
+
+            Player Lou_Williams = new Player("Lou Williams", "Shooting Guard", 20.0, 3.0, 5.4, 0.8, 0.1, 42.5, 1.4, 100, "LA Clippers", 1);
+            players[50] = Lou_Williams;
+
+            Player Terrence_Ross = new Player("Terrence Rose", "Shooting Guard", 15.1, 3.5, 1.7, 0.9, 0.4, 42.8, 2.7, 100, "Orlando Magic", 1);
+            players[51] = Terrence_Ross;
+
+            Player Rodney_Hood = new Player("Rodney Hood", "Shooting Guard", 11.2, 2.2, 1.8, 0.8, 0.2, 43.5, 1.2, 100, "Portland Trail Blazers", 1);
+            players[52] = Rodney_Hood;
+
+            Player Seth_Curry = new Player("Seth Curry", "Shooting Guard", 7.9, 1.6, 0.9, 0.5, 0.2, 45.6, 1.5, 100, "Dallas Mavericks", 1);
+            players[53] = Seth_Curry;
+
+            Player Kyle_Korver = new Player("Kyle Korver", "Shooting Guard", 8.6, 2.3, 1.2, 0.4, 0.2, 41.6, 2.0, 100, "Utah Jazz", 1);
+            players[54] = Kyle_Korver;
+
+            Player Jaylen_Brown = new Player("Jaylen Brown", "Shooting Guard", 13.0, 4.2, 1.4, 0.9, 0.4, 46.5, 1.3, 100, "Boston Celtics", 1);
+            players[55] = Jaylen_Brown;
+
+            Player Josh_Hart = new Player("Josh Hart", "Shooting Guard", 7.8, 3.7, 1.4, 1.0, 0.6, 40.7, 1.4, 100, "New Orleans Pelicans", 1);
+            players[56] = Josh_Hart;
+
+            Player Kentavious_Caldwell_Pope = new Player("Kentavious Caldwell-Pope", "Shooting Guard", 11.4, 2.9, 1.3, 0.9, 0.2, 43.0, 1.8, 100, "Los Angeles Lakers", 1);
+            players[57] = Kentavious_Caldwell_Pope;
+
+            Player Marco_Belinelli = new Player("Marco Belinelli", "Shooting Guard", 10.5, 2.5, 1.7, 0.4, 0.1, 41.3, 1.9, 100, "San Antonio Spurs", 1);
+            players[58] = Marco_Belinelli;
+
+            Player Luke_Kennard = new Player("Luke Kennard", "Shooting Guard", 9.7, 2.9, 1.8, 0.4, 0.2, 43.8, 1.7, 100, "Detroit Pistons", 1);
+            players[59] = Luke_Kennard;
+
+            // SMALL FORWARDS
+
+            Player Paul_George = new Player("Paul George", "Small Forward", 28.0, 8.2, 4.1, 2.2, 0.4, 43.8, 3.8, 100, "LA Clippers", 1);
+            players[60] = Paul_George;
+
+            Player Devin_Booker = new Player("Devin Booker", "Small Forward", 26.6, 4.1, 6.8, 0.9, 0.2, 46.7, 2.1, 100, "Phoenix Suns", 1);
+            players[61] = Devin_Booker;
+
+            Player Andrew_Wiggins = new Player("Andrew Wiggins", "Small Forward", 18.1, 4.8, 2.5, 1.0, 0.7, 41.2, 1.6, 100, "Minnesota Timberwolves", 1);
+            players[62] = Andrew_Wiggins;
+
+            Player Tobias_Harris = new Player("Tobias Harris", "Small Forward", 20.0, 7.9, 2.8, 0.6, 0.5, 48.7, 1.9, 100, "Philadelphia Sixers", 1);
+            players[63] = Tobias_Harris;
+
+            Player Kevin_Durant = new Player("Kevin Durant", "Small Forward", 26.0, 6.4, 5.9, 0.7, 1.1, 52.1, 1.8, 100, "Brooklyn Nets", 1);
+            players[64] = Kevin_Durant;
+
+            Player PJ_Tucker = new Player("P.J. Tucker", "Small Forward", 7.3, 5.8, 1.2, 1.6, 0.5, 38.6, 1.8, 100, "Houston Rockets", 1);
+            players[65] = PJ_Tucker;
+
+            Player Trevor_Ariza = new Player("Trevor Ariza", "Small Forward", 12.5, 5.4, 3.7, 1.3, 0.3, 39.9, 2.1, 100, "Washington Wizards", 1);
+            players[66] = Trevor_Ariza;
+
+            Player Kawhi_Leonard = new Player("Kawhi Leonard", "Small Forward", 26.6, 7.3, 3.3, 1.8, 0.4, 49.6, 1.9, 100, "LA Clippers", 1);
+            players[67] = Kawhi_Leonard;
+
+            Player Harrison_Barnes = new Player("Harrison Barnes", "Small Forward", 16.4, 4.7, 1.5, 0.6, 0.2, 42.0, 2.3, 100, "Sacramento Kings", 1);
+            players[68] = Harrison_Barnes;
+
+            Player Jerami_Grant = new Player("Jerami Grant", "Small Forward", 13.6, 5.2, 1.0, 0.8, 1.3, 49.7, 1.4, 100, "Denver Nuggets", 1);
+            players[69] = Jerami_Grant;
+
+            Player Luka_Doncic = new Player("Luka Doncic", "Small Forward", 21.2, 7.8, 6.0, 1.1, 0.3, 42.7, 2.3, 100, "Dallas Mavericks", 1);
+            players[70] = Luka_Doncic;
+
+            Player Justin_Holiday = new Player("Jusin Holiday", "Small Forward", 10.5, 3.9, 1.8, 0.4, 1.3, 38.6, 2.0, 100, "Memphis Grizzlies", 1);
+            players[71] = Justin_Holiday;
+
+            Player Bojan_Bogdanovic = new Player("Bojan Bogdanovic", "Small Forward", 18.0, 4.1, 2.0, 0.9, 0.0, 49.7, 2.0, 100, "Utah Jazz", 1);
+            players[72] = Bojan_Bogdanovic;
+
+            Player Nicolas_Batum = new Player("Nicolas Batum", "Small Forward", 9.3, 5.2, 3.3, 0.9, 0.6, 45.0, 1.5, 100, "Charlotte Hornets", 1);
+            players[73] = Nicolas_Batum;
+
+            Player Joe_Ingles = new Player("Joe Ingles", "Small Forward", 12.1, 4.0, 5.7, 1.2, 0.2, 44.8, 2.3, 100, "Utah Jazz", 1);
+            players[74] = Joe_Ingles;
+
+            Player Khris_Middleton = new Player("Khris Middleton", "Small Forward", 18.3, 6.0, 4.3, 1.0, 0.1, 44.1, 2.3, 100, "Milwaukee Bucks", 1);
+            players[75] = Khris_Middleton;
+
+            Player Jayson_Tatum = new Player("Jayson Tatum", "Small Forward", 15.7, 6.0, 2.1, 1.1, 0.7, 45.0, 1.5, 100, "Boston Celtics", 1);
+            players[76] = Jayson_Tatum;
+
+            Player Deandre_Ayton = new Player("Deandre Ayton", "Small Forward", 16.3, 10.3, 1.8, 0.9, 0.9, 58.5, 0.0, 100, "Phoenix Suns", 1);
+            players[77] = Deandre_Ayton;
+
+            Player Danilo_Gallinari = new Player("Danilo Gallinari", "Small Forward", 19.8, 6.1, 2.6, 0.7, 0.3, 46.3, 2.4, 100, "Oklahoma City Thunder", 1);
+            players[78] = Danilo_Gallinari;
+
+            Player Joe_Harris = new Player("Joe Harris", "Small Forward", 13.7, 3.8, 2.4, 0.5, 0.2, 50.0, 2.4, 100, "Brooklyn Nets", 1);
+            players[79] = Joe_Harris;
+
+            Player Jeff_Green = new Player("Jeff Green", "Small Forward", 12.3, 4.0, 1.8, 0.6, 0.5, 47.5, 1.4, 100, "Utah Jazz", 1);
+            players[80] = Jeff_Green;
+
+            Player Rudy_Gay = new Player("Rudy Gay", "Small Forward", 13.7, 6.8, 2.6, 0.8, 0.5, 50.4, 1.1, 100, "San Antonio Spurs", 1);
+            players[81] = Rudy_Gay;
+
+            Player Gordon_Hayward = new Player("Gordon Hayward", "Small Forward", 11.5, 4.5, 3.4, 0.3, 1.5, 46.6, 1.1, 100, "Boston Celtics", 1);
+            players[82] = Gordon_Hayward;
+
+            Player DeMarre_Carroll = new Player("DeMarre Carroll", "Small Forward", 11.1, 5.2, 1.3, 0.5, 0.1, 39.5, 1.6, 100, "San Antonio Spurs", 1);
+            players[83] = DeMarre_Carroll;
+
+            Player Norman_Powell = new Player("Norman Powell", "Small Forward", 8.6, 2.3, 1.5, 0.7, 0.2, 48.3, 1.1, 100, "Toronto Raptors", 1);
+            players[84] = Norman_Powell;
+
+            Player Maurice_Harkless = new Player("Maurice Harkless", "Small Forward", 7.7, 4.5, 1.2, 1.1, 0.9, 48.7, 0.6, 100, "LA Clippers", 1);
+            players[85] = Maurice_Harkless;
+
+            Player Andre_Iguodala = new Player("Andre Iguodala", "Small Forward", 5.7, 3.7, 3.2, 0.9, 0.8, 50.0, 0.7, 100, "Memphis Grizzlies", 1);
+            players[86] = Andre_Iguodala;
+
+            Player Mario_Hezonja = new Player("Mario Hezonja", "Small Forward", 8.8, 4.1, 1.5, 1.0, 0.1, 41.2, 0.7, 100, "Portland Trail Blazers", 1);
+            players[87] = Mario_Hezonja;
+
+            Player Justise_Winslow = new Player("Justise Winslow", "Small Forward", 12.6, 5.4, 4.3, 1.1, 0.3, 43.3, 1.5, 100, "Miami Heat", 1);
+            players[88] = Justise_Winslow;
+
+            Player Kevin_Knox = new Player("Kevin Knox", "Small Forward", 12.8, 4.5, 1.1, 0.6, 0.3, 37.0, 1.7, 100, "New York Knicks", 1);
+            players[89] = Kevin_Knox;
+
+            // POWER FORWARDS
+
+            Player Blake_Griffin = new Player("Blake Griffin", "Power Forward", 24.5, 7.5, 5.4, 0.7, 0.4, 46.2, 2.5, 100, "Detroit Pistons", 1);
+            players[90] = Blake_Griffin;
+
+            Player Aaron_Gordon = new Player("Aaron Gordon", "Power Forward", 16.0, 7.4, 3.7, 0.7, 0.7, 44.9, 1.6, 100, "Orlando Magic", 1);
+            players[91] = Aaron_Gordon;
+
+            Player Kyle_Kuzma = new Player("Kyle Kuzma", "Power Forward", 18.7, 5.5, 2.5, 0.6, 0.4, 45.6, 1.8, 100, "Los Angeles Lakers", 1);
+            players[92] = Kyle_Kuzma;
+
+            Player Giannis_Antetokounmpo = new Player("Giannis Antetokounmpo", "Power Forward", 27.7, 12.5, 5.9, 1.3, 1.5, 57.8, 0.7, 100, "Milwaukee Bucks", 1);
+            players[93] = Giannis_Antetokounmpo;
+
+            Player Pascal_Siakam = new Player("Pascal Siakam", "Power Forward", 16.9, 6.9, 3.1, 0.9, 0.7, 54.9, 1.0, 100, "Toronto Raptors", 1);
+            players[94] = Pascal_Siakam;
+
+            Player Draymond_Green = new Player("Draymond Green", "Power Forward", 7.4, 7.3, 6.9, 1.4, 1.1, 44.5, 0.7, 100, "Golden State Warriors", 1);
+            players[95] = Draymond_Green;
+
+            Player Thaddeus_Young = new Player("Thaddeus Young", "Power Forward", 12.6, 6.5, 2.5, 1.5, 0.4, 52.7, 0.6, 100, "Chicago Bulls", 1);
+            players[96] = Thaddeus_Young;
+
+            Player John_Collins = new Player("John Collins", "Power Forward", 19.5, 9.8, 2.0, 0.4, 0.6, 56.0, 0.9, 100, "Atlanta Hawks", 1);
+            players[97] = John_Collins;
+
+            Player Marvin_Williams = new Player("Marvin Williams", "Power Forward", 10.1, 5.4, 1.2, 0.9, 0.8, 42.2, 1.9, 100, "Charlotte Hornets", 1);
+            players[98] = Marvin_Williams;
+
+            Player AlFarouq_Aminu = new Player("Al-Farouq Aminu", "Power Forward", 9.4, 7.5, 1.3, 0.8, 0.4, 43.3, 1.2, 100, "Orlando Magic", 1);
+            players[99] = AlFarouq_Aminu;
+
+            Player Marcus_Morris = new Player("Marcus Morris", "Power Forward", 13.9, 6.1, 1.5, 0.6, 0.3, 44.7, 1.9, 100, "New York Knicks", 1);
+            players[100] = Marcus_Morris;
+
+            Player Jae_Crowder = new Player("Jae Crowder", "Power Forward", 11.9, 4.8, 1.7, 0.8, 0.4, 39.9, 2.2, 100, "Memphis Grizzlies", 1);
+            players[101] = Jae_Crowder;
+
+            Player Paul_Millsap = new Player("Paul Millsap", "Power Forward", 12.6, 7.2, 2.0, 1.2, 0.8, 48.4, 0.8, 100, "Denver Nuggets", 1);
+            players[102] = Paul_Millsap;
+
+            Player Jabari_Parker = new Player("Jabari Parker", "Power Forward", 14.5, 6.6, 2.4, 0.7, 0.5, 49.3, 1.0, 100, "Washington Wizards", 1);
+            players[103] = Jabari_Parker;
+
+            Player Larry_Nancy_Jr = new Player("Larry Nancy Jr", "Power Forward", 9.4, 8.2, 3.2, 1.5, 0.6, 52.0, 0.5, 100, "Clevland Cavaliers", 1);
+            players[104] = Larry_Nancy_Jr;
+
+            Player Jonathan_Isaac = new Player("Jonathan Isaac", "Power Forward", 9.6, 5.5, 1.1, 0.8, 1.3, 42.9, 1.1, 100, "Orlando Magic", 1);
+            players[105] = Jonathan_Isaac;
+
+            Player Montrezl_Harrell = new Player("Montrezl Harrell", "Power Forward", 16.6, 6.5, 2.0, 0.9, 1.3, 61.5, 0.0, 100, "LA Clippers", 1);
+            players[106] = Montrezl_Harrell;
+
+            Player Jaren_Jackson_Jr = new Player("Jaren Jacskon Jr", "Power Forward", 13.8, 4.7, 1.1, 0.9, 1.4, 50.6, 0.9, 100, "Memphis Grizzlies", 1);
+            players[107] = Jaren_Jackson_Jr;
+
+            Player Noah_Vonleh = new Player("Noah Vonleh", "Power Forward", 8.4, 7.8, 1.9, 0.7, 0.8, 47.0, 0.7, 100, "New York Knicks", 1);
+            players[108] = Noah_Vonleh;
+
+            Player Marvin_Bagley_III = new Player("Marvin Bagley III", "Power Forward", 14.9, 7.6, 1.0, 0.5, 1.0, 50.4, 0.5, 100, "Sacramento Kings", 1);
+            players[109] = Marvin_Bagley_III;
+
+            Player Dario_Saric = new Player("Dario Saric", "Power Forward", 10.6, 5.6, 1.6, 0.6, 0.1, 43.7, 1.5, 100, "Minnesota Timberwolves", 1);
+            players[110] = Dario_Saric;
+
+            Player Domantas_Sabonis = new Player("Domantas Sabonis", "Power Forward", 14.1, 9.3, 2.9, 0.6, 0.4, 59.0, 0.1, 100, "Indiana Pacers", 1);
+            players[111] = Domantas_Sabonis;
+
+            Player Taj_Gibson = new Player("Taj Gibson", "Power Forward", 10.8, 6.5, 1.2, 0.8, 0.6, 56.6, 0.2, 100, "New York Knicks", 1);
+            players[112] = Taj_Gibson;
+
+            Player Derrick_Favors = new Player("Derrick Favors", "Power Forward", 11.8, 7.4, 1.2, 0.7, 1.4, 58.6, 0.2, 100, "New Orleans Pelicans", 1);
+            players[113] = Derrick_Favors;
+
+            Player Nemanja_Bjelica = new Player("Nemanja Bjelica", "Power Forward", 9.6, 5.8, 1.9, 0.7, 0.7, 47.9, 1.3, 100, "Sacramento Kings", 1);
+            players[114] = Nemanja_Bjelica;
+
+            Player Kelly_Olynyk = new Player("Kelly Olynyk", "Power Forward", 10.0, 4.7, 1.8, 0.7, 0.5, 46.3, 1.4, 100, "Miami Heat", 1);
+            players[115] = Kelly_Olynyk;
+
+            Player Markieff_Morris = new Player("Markieff Morris", "Power Forward", 9.4, 4.6, 1.4, 0.6, 0.4, 42.1, 1.2, 100, "Oklahoma City Thunder", 1);
+            players[116] = Markieff_Morris;
+
+            Player Mason_Plumlee = new Player("Mason Plumlee", "Power Forward", 7.8, 6.4, 3.0, 0.8, 0.9, 59.3, 0.0, 100, "Denver Nuggets", 1);
+            players[117] = Mason_Plumlee;
+
+            Player Ersan_Ilyasova = new Player("Ersan Ilyasova", "Power Forward", 6.8, 4.5, 0.8, 0.5, 0.3, 43.8, 0.9, 100, "Milwaukee Bucks", 1);
+            players[118] = Ersan_Ilyasova;
+
+            Player Dwight_Powell = new Player("Dwight Powell", "Power Forward", 10.6, 5.3, 1.5, 0.6, 0.6, 59.7, 0.5, 100, "Dallas Mavericks", 1);
+            players[119] = Dwight_Powell;
+
+            // CENTERS
+
+            Player Joel_Embiid = new Player("Joel Embiid", "Center", 27.5, 13.6, 3.7, 0.7, 1.9, 48.4, 1.2, 100, "Philadelphia Sixers", 1);
+            players[120] = Joel_Embiid;
+
+            Player Clint_Capela = new Player("Clint Capela", "Center", 16.6, 12.7, 1.4, 0.7, 1.5, 64.8, 0.0, 100, "Houston Rockets", 1);
+            players[121] = Clint_Capela;
+
+            Player Andre_Drummond = new Player("Andre Drummond", "Center", 17.3, 15.6, 1.4, 1.7, 1.7, 53.3, 0.1, 100, "Detroit Pistons", 1);
+            players[122] = Andre_Drummond;
+
+            Player Steven_Adams = new Player("Steven Adams", "Center", 13.9, 9.5, 1.6, 1.5, 1.0, 59.5, 0.0, 100, "Oklahoma City Thunder", 1);
+            players[123] = Steven_Adams;
+
+            Player LaMarcus_Aldridge = new Player("LaMarcus Aldridge", "Center", 21.3, 9.2, 2.4, 0.5, 1.3, 51.9, 0.1, 100, "San Antonio Spurs", 1);
+            players[124] = LaMarcus_Aldridge;
+
+            Player Karl_Anthony_Towns = new Player("Karl-Anthony Towns", "Center", 24.4, 12.4, 3.4, 0.9, 1.6, 51.8, 1.8, 100, "Minnesota Timberwolves", 1);
+            players[125] = Karl_Anthony_Towns;
+
+            Player Rudy_Gobert = new Player("Rudy Gobert", "Center", 15.9, 12.9, 2.0, 0.8, 2.3, 66.9, 0.0, 100, "Utah Jazz", 1);
+            players[126] = Rudy_Gobert;
+
+            Player Nikola_Vucevic = new Player("Nikoa Vucevic", "Center", 20.8, 12.0, 3.8, 1.0, 1.1, 51.8, 1.1, 100, "Orlando Magic", 1);
+            players[127] = Nikola_Vucevic;
+
+            Player Nikola_Jokic = new Player("Nikola Jokic", "Center", 20.1, 10.8, 7.3, 1.4, 0.7, 51.1, 1.0, 100, "Denver Nuggets", 1);
+            players[128] = Nikola_Jokic;
+
+            Player Marc_Gasol = new Player("Marc Gasol", "Center", 13.6, 7.9, 4.4, 1.1, 1.1, 44.8, 1.3, 100, "Toronto Raptors", 1);
+            players[129] = Marc_Gasol;
+
+            Player Julius_Randle = new Player("Julius Randle", "Center", 21.4, 8.7, 3.1, 0.7, 0.6, 52.4, 0.9, 100, "New York Knicks", 1);
+            players[130] = Julius_Randle;
+
+            Player DeAndre_Jordan = new Player("DeAndre Jordan", "Center", 11.0, 13.1, 2.3, 0.6, 1.1, 64.1, 0.0, 100, "Dallas Mavericks", 1);
+            players[131] = DeAndre_Jordan;
+
+            Player Al_Horford = new Player("Al Horford", "Center", 13.6, 6.7, 4.2, 0.9, 1.3, 53.5, 1.1, 100, "Philadelphia Sixers", 1);
+            players[132] = Al_Horford;
+
+            Player Brook_Lopez = new Player("Brook Lopez", "Center", 12.5, 4.9, 1.2, 0.6, 2.2, 45.2, 2.3, 100, "Milwaukee Bucks", 1);
+            players[133] = Brook_Lopez;
+
+            Player Myles_Turner = new Player("Myles Turner", "Center", 13.3, 7.2, 1.6, 0.8, 2.7, 48.7, 1.0, 100, "Indiana Pacers", 1);
+            players[134] = Myles_Turner;
+
+            Player Jusuf_Nurkic = new Player("Jusuf Nurkic", "Center", 15.6, 10.4, 3.2, 1.0, 1.4, 50.8, 0.0, 100, "Portland Trail Blazers", 1);
+            players[135] = Jusuf_Nurkic;
+
+            Player Willie_Cauley_Stein = new Player("Willie Cauley-Stein", "Center", 11.9, 8.4, 2.4, 1.2, 0.6, 55.6, 0.0, 100, "Golden State Warriors", 1);
+            players[136] = Willie_Cauley_Stein;
+
+            Player Serge_Ibaka = new Player("Serge Ibaka", "Center", 15.0, 8.1, 1.3, 0.4, 1.4, 52.9, 0.7, 100, "Toronto Raptors", 1);
+            players[137] = Serge_Ibaka;
+
+            Player Jarrett_Allen = new Player("Jarrett Allen", "Center", 10.9, 8.4, 1.4, 0.5, 1.5, 59.0, 0.1, 100, "Brooklyn Nets", 1);
+            players[138] = Jarrett_Allen;
+
+            Player Enes_Kanter = new Player("Enes Kanter", "Center", 13.7, 9.8, 1.7, 0.5, 0.4, 54.9, 0.1, 100, "Portland Trail Blazers", 1);
+            players[139] = Enes_Kanter;
+
+            Player Hassan_Whiteside = new Player("Hassan Whiteside", "Center", 12.3, 11.3, 0.8, 0.6, 1.9, 57.1, 0.0, 100, "Portland Trail Blazers", 1);
+            players[140] = Hassan_Whiteside;
+
+            Player JaVale_McGee = new Player("JaVale McGee", "Center", 12.0, 7.5, 0.7, 0.6, 2.0, 62.4, 0.0, 100, "Los Angeles Lakers", 1);
+            players[141] = JaVale_McGee;
+
+            Player Robin_Lopez = new Player("Robin Lopez", "Center", 9.5, 3.9, 1.2, 0.1, 1.1, 56.8, 0.1, 100, "Milwaukee Bucks", 1);
+            players[142] = Robin_Lopez;
+
+            Player Kevon_Looney = new Player("Kevon Looney", "Center", 6.3, 5.2, 1.5, 0.6, 0.7, 62.5, 0.0, 100, "Golden State Warriors", 1);
+            players[143] = Kevon_Looney;
+
+            Player Dewayne_Dedmon = new Player("Dewayne Dedmon", "Center", 10.8, 7.5, 1.4, 1.1, 1.1, 49.2, 1.3, 100, "Sacramento Kings", 1);
+            players[144] = Dewayne_Dedmon;
+
+            Player Bam_Adebayo = new Player("Bam Adebayo", "Center", 8.9, 7.3, 2.2, 0.9, 0.8, 57.6, 0.0, 100, "Miami Heat", 1);
+            players[145] = Bam_Adebayo;
+
+            Player Mitchell_Robinson = new Player("Mitchell Robinson", "Center", 7.3, 6.4, 0.6, 0.8, 2.4, 69.4, 0.0, 100, "New York Knicks", 1);
+            players[146] = Mitchell_Robinson;
+
+            Player Alex_Len = new Player("Alex Len", "Center", 11.1, 5.5, 1.1, 0.4, 0.9, 49.4, 1.0, 100, "Atlanta Hawks", 1);
+            players[147] = Alex_Len;
+
+            Player Willy_Hernangomez = new Player("Willy Hernangomez", "Center", 7.3, 5.4, 1.0, 0.3, 0.3, 51.9, 0.3, 100, "Charlotte Hornets", 1);
+            players[148] = Willy_Hernangomez;
+
+            Player Boban_Marjanovic = new Player("Boban Marjanovic", "Center", 7.3, 4.6, 0.9, 0.3, 0.5, 61.5, 0.1, 100, "Philadelphia Sixers", 1);
+            players[149] = Boban_Marjanovic;
+
+
+            //Player Lebron_James = new Player("Lebron James", "Small Forward", 27.2, 8.2, 7.0, 0.8, 0.7, 53.2, 3.3, 10, 7.0, "Los Angeles Lakers", 35.0);
+            //players[2] = Lebron_James;
+            //Player Khawi_Leonard = new Player("Khawi Leonard", "Small Forward", 26.6, 7.8, 3.0, 2.8, 1.7, 53.2, 3.8, 8, 7.3, "Toronto Raptors", 23.1);
+            //players[3] = Khawi_Leonard;
+            //Player Nicola_Jokic = new Player("Nicola Jokic", "Center", 23.6, 10.8, 7.3, 0.3, 0.7, 53.2, 40.3, 9, 2.3, "Denver Nuggets", 12.1);
+            //players[4] = Nicola_Jokic;
+
+            //Player Krzysiek = new Player("Krzysiek", "Power Forward", 27.8, 7.2, 4.0, 1.2, 1.1, 53.2, 2.3, 9, 7.8, "Golden State Warriors", 32.3);
+            //players[5] = Krzysiek;
+            //Player Borowik = new Player("Borowik", "Shooting Guard", 36.8, 6.2, 10.0, 1.4, 0.1, 53.2, 1.9, 10, 7.7, "Houston Rockets", 33.4);
+            //players[6] = Borowik;
+            //Player Samojlik = new Player("Samojlik", "Small Forward", 27.2, 8.2, 7.0, 0.8, 0.7, 53.2, 4.9, 10, 7.0, "Los Angeles Lakers", 35.0);
+            //players[7] = Samojlik;
+            //Player Kungfu = new Player("Kungfu", "Shooting Guard", 26.6, 7.8, 3.0, 2.8, 1.7, 53.2, 1.7, 8, 7.3, "Toronto Raptors", 23.1);
+            //players[8] = Kungfu;
+            //Player Kozak = new Player("Kozak", "Center", 23.6, 10.8, 7.3, 0.3, 0.7, 53.2, 2.3, 9, 6.8, "Denver Nuggets", 12.1);
+            //players[9] = Kozak;
+
+            //Player Wasia = new Player("Wasia", "Power Forward", 27.8, 7.2, 4.0, 1.2, 1.1, 53.2, 1.3, 9, 7.8, "Golden State Warriors", 32.3);
+            //players[10] = Wasia;
+            //Player Iwan = new Player("Iwan", "Point Guard", 36.8, 6.2, 10.0, 1.4, 0.1, 53.2, 2.5, 10, 7.7, "Houston Rockets", 33.4);
+            //players[11] = Iwan;
+            //Player Wołodia = new Player("Wołodia", "Power Forward", 27.2, 8.2, 7.0, 0.8, 0.7, 53.2, 3.0, 10, 7.0, "Los Angeles Lakers", 35.0);
+            //players[12] = Wołodia;
+            //Player Ściopa = new Player("Ściopa", "Small Forward", 26.6, 7.8, 3.0, 2.8, 1.7, 53.2, 2.9, 8, 7.3, "Toronto Raptors", 23.1);
+            //players[13] = Ściopa;
+            //Player Wania = new Player("Wania", "Center", 23.6, 10.8, 7.3, 0.3, 0.7, 53.2, 2.5, 9, 6.8, "Denver Nuggets", 12.1);
+            //players[14] = Wania;
+        }
+
+        
+    }
+}
