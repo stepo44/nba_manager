@@ -1,0 +1,45 @@
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace nba
+{
+    class Player
+    {
+        public string name;
+        public string position;
+        public double points;
+        public double rebounds;
+        public double assists;
+        public double stills;
+        public double blocks;
+        public double percentage2;
+        public double goalsMade3;
+        public int basketball_iq;
+        public string team;
+        public double salary;
+        public bool availabilty = true;
+
+
+
+        public Player(string nameArg, string positionArg, double pointsArg, double reboundsArg,
+                double assistsArg, double stillsArg, double blocksArg, double percentage2Arg, double goalsMade3Arg,
+                int basketball_iqArg, string teamArg, double salaryArg)
+        {
+            this.name = nameArg;
+            this.position = positionArg;
+            this.points = pointsArg;
+            this.rebounds = reboundsArg;
+            this.assists = assistsArg;
+            this.stills = stillsArg;
+            this.blocks = blocksArg;
+            this.percentage2 = percentage2Arg;
+            this.goalsMade3 = goalsMade3Arg;
+            this.basketball_iq = basketball_iqArg;
+            this.team = teamArg;
+            this.salary = salaryArg;
+
+        }
+    }
+}
