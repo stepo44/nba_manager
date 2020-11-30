@@ -1,0 +1,60 @@
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace nba
+{
+    class ScoreOtherManagers
+    {
+        public static Player[] playersScore = new Player[5];
+
+        public static void CountScoreOtherManagers()
+        {
+            for (int i = 1; i < AllManagers.managers.Length; i++)
+            {
+                playersScore[0] = AllManagers.managers[i].yourTeam.guard1;
+                playersScore[1] = AllManagers.managers[i].yourTeam.guard2;
+                playersScore[2] = AllManagers.managers[i].yourTeam.forward1;
+                playersScore[3] = AllManagers.managers[i].yourTeam.forward2;
+                playersScore[4] = AllManagers.managers[i].yourTeam.center;
+
+                double counterPoints = 0;
+                double counterPointsPerc = 0;
+                double counter3Points = 0;
+                double counterAssists = 0;
+                double counterRebounds = 0;
+                double counterStills = 0;
+                double counterBlocks = 0;
+
+                foreach (var player in playersScore)
+                {
+                    //offense:
+                    counterPoints = counterPoints + (player.points * 0.61);
+                    counterPointsPerc = counterPointsPerc + (player.percentage2 * 0.12);
+                    counter3Points = counter3Points + (player.goalsMade3 * 2.74);
+                    counterAssists = counterAssists + (player.assists * 2.617);
+                    //defense:
+                    counterRebounds = counterRebounds + (player.rebounds * 1.538);
+                    counterStills = counterStills + (player.stills * 5.455);
+                    counterBlocks = counterBlocks + (player.blocks * 4.444);
+                }
+
+                AllManagers.managers[i].yourTeam.scoreTotal = (counter3Points + counterPointsPerc + counter3Points + counterAssists
+                + counterRebounds + counterStills + counterBlocks + AllManagers.managers[1].yourTeam.scorePositions);
+
+                Console.WriteLine("----------------------------------------------------");
+                Console.WriteLine("\n       DRUŻYNA {0} \n", AllManagers.managers[i].yourTeam.name);
+                Console.WriteLine("- adekwatność dopasowania zawodników do pozycji = " + AllManagers.managers[1].yourTeam.scorePositions);
+                Console.WriteLine("- potencjał ofensywny = " + counterPoints);
+                Console.WriteLine("- skuteczność ofensywna za 2 pkt = " + counterPointsPerc);
+                Console.WriteLine("- skuteczność ofensywna za 3 pkt = " + counter3Points);
+                Console.WriteLine("- asysty = " + counterAssists);
+                Console.WriteLine("- zbiórki = " + counterRebounds);
+                Console.WriteLine("- przechwyty = " + counterStills);
+                Console.WriteLine("- bloki = " + counterBlocks);
+                Console.WriteLine("\n     SUMA UZYSKANYCH PUNKTÓW = " + AllManagers.managers[i].yourTeam.scoreTotal);
+            }
+        }
+    }
+}
