@@ -1,0 +1,153 @@
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace nba
+{
+    class AllManagers
+    {
+        public static User[] managers;
+
+        public static void CreateManagersArray()
+        {
+            managers = new User[10];
+        }
+
+
+        public static void PopulateManagersArrayWithTheirTeams()
+        {
+            for (int i = 1; i < AllManagers.managers.Length; i++)
+            {
+                for (int y = 0; y < Team.teams.Length; y++)
+                {
+                    if (Team.teams[y].availability == true)  // bo team gracza jest zablokowany = false
+                    {
+                        AllManagers.managers[i] = new User();
+                        AllManagers.managers[i].yourTeam = Team.teams[y]; // przypisuje do userów-managerów nazwę drużyny
+                        AllManagers.managers[i].name = AllManagers.managers[i].yourTeam.managerName; // przypisanie do nazwy usera = imię managera danej drużyny
+                        
+                            // imiona managerów + zespoły CHECK:
+                            //Console.WriteLine("team = " + AllManagers.managers[i].yourTeam.name
+                            //                   + " a jego manager: " + AllManagers.managers[i].name);
+                            //Console.WriteLine();
+
+                        AllManagers.managers[i].yourTeam.availability = false;
+                        break;
+                    }
+                }
+            }
+        }
+
+        public static void ManagersChooseGuard1()
+        {
+            for (int i = 1; i < managers.Length; i++)
+            {
+                Player randPlayer = AllPlayers.SelectRandomGuardPlayer(); // wybór przypadkowego zawodnika do  zmiennej randPlayer
+                if (randPlayer is null)
+                {
+                    randPlayer = AllPlayers.SelectRandomForwardCenterPlayer();
+                }
+
+                for (int player = 0; player < AllPlayers.players.Length; player++) // przypisuje random zawodnika z randPlayer do bieżącego managera[i]
+                {
+                    if (AllPlayers.players[player].name == randPlayer.name)
+                    {
+                        managers[i].yourTeam.guard1 = AllPlayers.players[player];
+                        AllPlayers.players[player].availabilty = false;
+                    }
+                }
+            }
+        }
+
+        public static void ManagersChooseGuard2()
+        {
+            for (int i = 1; i < managers.Length; i++)
+            {
+                Player randPlayer = AllPlayers.SelectRandomGuardPlayer(); // wybór przypadkowego zawodnika do  zmiennej randPlayer
+                if (randPlayer is null)
+                {
+                    randPlayer = AllPlayers.SelectRandomForwardCenterPlayer();
+                }
+
+                for (int player = 0; player < AllPlayers.players.Length; player++)
+                {
+                    if (AllPlayers.players[player].name == randPlayer.name)
+                    {
+                        managers[i].yourTeam.guard2 = AllPlayers.players[player];
+                        AllPlayers.players[player].availabilty = false;
+                    }
+                }
+
+            }
+        }
+
+        public static void ManagersChooseForward1()
+        {
+            for (int i = 1; i < managers.Length; i++)
+            {
+                Player randPlayer = AllPlayers.SelectRandomForwardCenterPlayer(); // wybór przypadkowego zawodnika do  zmiennej randPlayer
+                if (randPlayer is null)
+                {
+                    randPlayer = AllPlayers.SelectRandomGuardPlayer();
+                }
+
+                for (int player = 0; player < AllPlayers.players.Length; player++)
+                {
+                    if (AllPlayers.players[player].name == randPlayer.name)
+                    {
+                        managers[i].yourTeam.forward1 = AllPlayers.players[player];
+                        AllPlayers.players[player].availabilty = false;
+                    }
+                }
+
+            }
+        }
+
+        public static void ManagersChooseForward2()
+        {
+            for (int i = 1; i < managers.Length; i++)
+            {
+                Player randPlayer = AllPlayers.SelectRandomForwardCenterPlayer(); // wybór przypadkowego zawodnika do  zmiennej randPlayer
+                if (randPlayer is null)
+                {
+                    randPlayer = AllPlayers.SelectRandomGuardPlayer();
+                }
+
+                for (int player = 0; player < AllPlayers.players.Length; player++)
+                {
+                    if (AllPlayers.players[player].name == randPlayer.name)
+                    {
+                        managers[i].yourTeam.forward2 = AllPlayers.players[player];
+                        AllPlayers.players[player].availabilty = false;
+                    }
+                }
+
+            }
+        }
+
+        public static void ManagersChooseCenter()
+        {
+            for (int i = 1; i < managers.Length; i++)
+            {
+                Player randPlayer = AllPlayers.SelectRandomForwardCenterPlayer(); // wybór przypadkowego zawodnika do  zmiennej randPlayer
+                if (randPlayer is null)
+                {
+                    randPlayer = AllPlayers.SelectRandomGuardPlayer();
+                }
+
+                for (int player = 0; player < AllPlayers.players.Length; player++)
+                {
+                    if (AllPlayers.players[player].name == randPlayer.name)
+                    {
+                        managers[i].yourTeam.center = AllPlayers.players[player];
+                        AllPlayers.players[player].availabilty = false;
+                    }
+                }
+
+            }
+        }
+
+
+    }
+}
