@@ -1,0 +1,99 @@
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Linq;
+
+namespace nba
+{
+    class PositionsMatchOtherManagers
+    {
+        public static string[] positions = new string[5];
+
+        public static void CountPositionsScoreOtherManagers()
+        {
+            for (int i = 1; i < AllManagers.managers.Length; i++)
+            {
+                positions[0] = AllManagers.managers[i].yourTeam.guard1.position;
+                positions[1] = AllManagers.managers[i].yourTeam.guard2.position;
+                positions[2] = AllManagers.managers[i].yourTeam.forward1.position;
+                positions[3] = AllManagers.managers[i].yourTeam.forward2.position;
+                positions[4] = AllManagers.managers[i].yourTeam.center.position;
+
+                int positionsScore = 0;
+
+                if (positions[0] == "Point Guard" && positions[1] == "Shooting Guard" && positions[2] == "Small Forward"
+                        && positions[3] == "Power Forward" && positions[4] == "Center")
+                {
+                    positionsScore = 200;
+                    AllManagers.managers[i].yourTeam.scorePositions = positionsScore;
+                }
+                else
+                {
+                    int centerCounter = 0;
+                    int guardCounter = 0;
+
+                    IEnumerable<string> query = positions
+                        .Where(n => n.Contains("Center"));
+                    foreach (var center in query)
+                    {
+                        centerCounter++;
+                    }
+                    if (centerCounter == 4)
+                    {
+                        positionsScore = 30;
+                        AllManagers.managers[i].yourTeam.scorePositions = positionsScore;
+                    }
+                    else if (centerCounter == 5)
+                    //* 9. if (all C) = 10 pkt
+                    {
+                        positionsScore = 10;
+                        AllManagers.managers[i].yourTeam.scorePositions = positionsScore;
+                    }
+
+                    IEnumerable<string> query2 = positions
+                        .Where(n => n.Contains("Guard"));
+                    foreach (var guard in query2)
+                    {
+                        guardCounter++;
+                    }
+
+                    if (guardCounter == 2)
+                    //* 2. if (any of P x 2,  any of F x 2, C) = 180 pkt
+                    //* 3. if (any of P x 2,  any of F x 3) = 160 pkt
+                    {
+                        positionsScore = 180;
+                        AllManagers.managers[i].yourTeam.scorePositions = positionsScore;
+                    }
+                    else if (guardCounter == 1) //* 5. if (P x1, any of F/C x 4) = 120 pkt
+                    {
+                        positionsScore = 120;
+                        AllManagers.managers[i].yourTeam.scorePositions = positionsScore;
+                    }
+                    else if (guardCounter == 3) //* 4. if (any of P x 3, any of F/C x 3) = 140 pkt
+                    {
+                        positionsScore = 140;
+                        AllManagers.managers[i].yourTeam.scorePositions = positionsScore;
+                    }
+                    else if (guardCounter == 0) //* 6. if (all F) = 100 pkt
+                    {
+                        positionsScore = 100;
+                        AllManagers.managers[i].yourTeam.scorePositions = positionsScore;
+                    }
+                    else if (guardCounter == 4) //* 7. if (any of P x 4, any of F/C x 1) = 80 pkt
+                    {
+                        positionsScore = 80;
+                        AllManagers.managers[i].yourTeam.scorePositions = positionsScore;
+                    }
+                    else if (guardCounter == 5) //* 8. if (all P) = 60 pkt
+                    {
+                        positionsScore = 60;
+                        AllManagers.managers[i].yourTeam.scorePositions = positionsScore;
+                    }
+                    else Console.WriteLine("Błąd w obliczeniach pozycji");
+                    AllManagers.managers[i].yourTeam.scorePositions = positionsScore;
+                }
+            }
+        }
+    }
+}
